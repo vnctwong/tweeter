@@ -1,0 +1,28 @@
+/* whole box inside container */
+.new-tweet {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
+  padding-top: 1px;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  background-color: #eee;
+  border-radius: 14px;
+}
+
+/* text box */
+.tweet-field {
+  width: 100%;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+/*tweet button */
+.submit {}
+
+/* counter */
+.counter {
+  float: right;
+}
