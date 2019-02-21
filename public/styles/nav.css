@@ -5,6 +5,7 @@
   width: 100%;
   background: #00a087;
   color: #e8fdff;
+  z-index: 1030;
 }
 
 #nav-bar .logo {
