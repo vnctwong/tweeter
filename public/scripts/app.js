@@ -49,9 +49,9 @@ $(document).ready(function () {
 
   function renderTweets(tweetArray) {
     // loops through tweets
-    for (var e = 0; e < tweetArray.length; e++) {
+    for (let i = 0; i < tweetArray.length; i++) {
       // calls createTweetElement for each tweet
-      let $tweet = createTweetElement(tweetArray[e]);
+      let $tweet = createTweetElement(tweetArray[i]);
       // takes return value and appends it to the tweets container
       $('.tweet-list').append($tweet)
     }
