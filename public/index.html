@@ -22,6 +22,7 @@
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/test.js"></script> -->
 </head>
 
 <body>
@@ -47,23 +48,26 @@
       </form>
     </section>
 
-    <article class="tweet-container">
-      <header class="tweet-container-header">
-        <img src='http://cdn.shopify.com/s/files/1/0822/1983/articles/bf6353fa41888904d313ace7d34f5682.png?v=1503693228'
-          class='avatar'>
-        <span class="fullName">full name</span>
-        <text name='text' class='username'>username</text>
-      </header>
+    <section class='tweet-list'>
+      <article class="tweet-container">
 
-      <div class='tweet-submitted'>
-        old tweet
-      </div>
+        <header class="tweet-container-header">
+          <img src='http://cdn.shopify.com/s/files/1/0822/1983/articles/bf6353fa41888904d313ace7d34f5682.png?v=1503693228'
+            class='avatar'>
+          <span class="fullName">full name</span>
+          <span class='username'>username</span>
+        </header>
 
-      <footer>
-        <p name="text" class="days-submitted">10 days ago </p>
-      </footer>
+        <div class='tweet-submitted'>
+          old tweet
+        </div>
 
-    </article>
+        <footer class='tweet-container-footer'>
+          <p name="text" class="days-submitted">10 days ago </p>
+        </footer>
+
+      </article>
+    </section>
 
   </main>
 

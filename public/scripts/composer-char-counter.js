@@ -7,6 +7,7 @@ $(document).ready(function () {
     const $count = $(this).siblings('.counter');
     //use jq function .val() for value
     $count.text(140 - $(this).val().length);
+    //.text is a jQuery method
     //this should be the length of text in field
 
     if ($count.text() < 0) {
