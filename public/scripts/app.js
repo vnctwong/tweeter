@@ -63,10 +63,11 @@ $(() => {
         });
 
     } else if ($newTweetSlice.length > 140) {
-      alert('Text length exceeds 140 characters');
-
-    } else if (!$newTweetSlice) {
-      alert('Text field empty');
+      $('.error').text('Text length exceeds 140 characters');
+      $('.error').fadeOut(4000);
+    } else {
+      $('.error').text('Text field empty');
+      $('.error').fadeOut(4000);
     }
 
   });

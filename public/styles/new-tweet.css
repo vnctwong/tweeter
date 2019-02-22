@@ -22,6 +22,12 @@
 /*tweet button */
 .submit {}
 
+.error {
+  color: red;
+  padding-left: 5px;
+
+}
+
 /* counter */
 .counter {
   float: right;
