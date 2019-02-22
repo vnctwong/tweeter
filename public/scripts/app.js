@@ -49,10 +49,10 @@ $(() => {
     //define data reload object, serialize?
     const $newTweet = $('.tweet-field').serialize();
     //on 'success?' ajax reqs data + callback
-    console.log($newTweet)
     const $newTweetSlice = $newTweet.slice(5);
 
     if ($newTweetSlice.length < 140 && $newTweetSlice !== '') {
+      console.log($newTweet);
       $.post('/tweets', $newTweet)
         .then(() => {
           loadTweets();
@@ -68,7 +68,7 @@ $(() => {
     } else {
       $('.error').text('Text field empty');
       $('.error').fadeOut(4000);
-    }
+    };
 
   });
 
