@@ -1,67 +1,41 @@
-$(() => {
+"use strict";
 
-  function renderTweets(tweetArray) {
-    // loops through tweets
-    for (var e = 0; e < tweetArray.length; e++) {
-      // calls createTweetElement for each tweet
-      let $tweet = createTweetElement(tweetArray[e]);
-      // takes return value and appends it to the tweets container
-      $('.tweet-list').prepend($tweet)
+const MongoClient = require("mongodb").MongoClient;
+const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+
+MongoClient.connect(MONGODB_URI, (err, db) => {
+  if (err) {
+    console.error(`Failed to connect: ${MONGODB_URI}`);
+    throw err;
+  }
+
+  // We have a connection to the "tweeter" db, starting here.
+  console.log(`Connected to mongodb: ${MONGODB_URI}`);
+
+  // ==> Refactored and wrapped as new, tweet-specific function:
+
+  function getTweets(callback) {
+    db.collection("tweets").find().toArray((err, tweets) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, tweets);
+    });
+  }
+
+  // ==> Later it can be invoked. Remember even if you pass
+  //     `getTweets` to another scope, it still has closure over
+  //     `db`, so it will still work. Yay!
+
+  getTweets((err, tweets) => {
+    if (err) throw err;
+
+    console.log("Logging each tweet:");
+    for (let tweet of tweets) {
+      console.log(tweet);
     }
-  }
 
-  function createTweetElement(data) {
-    let $tweet = $('<article>').addClass('tweet-container');
-
-    //define <h>avatar, fullname, username, tweet-submitted, <f>days-submitted
-    let avatar = data.user.avatars.small;
-    let fullname = data.user.name;
-    let username = data.user.handle;
-    let tweetSubmitted = data.content.text
-    let daysSubmitted = data.created_at
-
-    //formart article you want to send out
-    $('<header>').addClass('tweet-container-header').appendTo($tweet);
-    $('<img>', {
-      id: 'image',
-      src: avatar,
-    }).addClass('avatar').appendTo($tweet.children('header'));
-    $('<span>').addClass('full-name').text(fullname).appendTo($tweet.children('header'));
-    $('<span>').addClass('user-name').text(username).appendTo($tweet.children('header'));
-    $('<div>').addClass('tweet-submitted').text(tweetSubmitted).appendTo($tweet);
-    $('<footer>').addClass('tweet-container-footer').appendTo($tweet);
-    $('<span>').addClass('days-submitted').text(daysSubmitted).appendTo($tweet.children('footer'));
-    console.log($tweet);
-    return $tweet;
-  }
-
-  //location of submit
-  $('.new-tweet').on('submit', (event) => {
-    //overides normal route
-    event.preventDefault();
-    //define data reload object, serialize?
-    const $urlStrTweet = $('.tweet-field').serialize();
-    //on 'success?' ajax reqs data + callback
-    console.log($urlStrTweet)
-    $.post('/tweets', $urlStrTweet)
-      //if post recieved
-      .then(() => {
-
-
-        //callback (async)
-        // renderTweets(payloadData);
-        //loadTweets();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    db.close();
   });
 
-  // function loadTweets() {
-  //   $.get('/tweets', callback) => {
-  //     renderTweets(tweetArray);
-  //   }
-  // }
-
-  // loadTweets();
 });
