@@ -46,12 +46,13 @@ $(() => {
     $.post('/tweets', $urlStrTweet)
       //if post recieved
       .then(() => {
-        console.log($urlStrTweet)
+
+
         //callback (async)
         // renderTweets(payloadData);
         //loadTweets();
       })
-      .fail((err) => {
+      .catch((err) => {
         console.log(err);
       });
   });

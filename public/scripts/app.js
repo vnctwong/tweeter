@@ -1,5 +1,11 @@
 $(() => {
 
+  function loadTweets() {
+    $.get('/tweets', (serverRouteResponseFnc) => {
+      renderTweets(serverRouteResponseFnc);
+    });
+  }
+
   function renderTweets(tweetArray) {
     // loops through tweets
     for (var e = 0; e < tweetArray.length; e++) {
@@ -41,27 +47,34 @@ $(() => {
     //overides normal route
     event.preventDefault();
     //define data reload object, serialize?
-    const $urlStrTweet = $('.tweet-field').serialize();
+    const $newTweet = $('.tweet-field').serialize();
     //on 'success?' ajax reqs data + callback
-    console.log($urlStrTweet)
-    $.post('/tweets', $urlStrTweet)
-      //if post recieved
-      .then(() => {
-        console.log($urlStrTweet)
-        // callback (async)
-        // renderTweets(payloadData);
-        // loadTweets();
-      })
-      .fail((err) => {
-        console.log(err);
-      });
+    console.log($newTweet)
+    const $newTweetSlice = $newTweet.slice(5);
+
+    if ($newTweetSlice.length < 140 && $newTweetSlice !== '') {
+      $.post('/tweets', $newTweet)
+        .then(() => {
+          loadTweets();
+
+        })
+        .fail((err) => {
+          console.log(err);
+        });
+
+    } else if ($newTweetSlice.length > 140) {
+      alert('Text length exceeds 140 characters');
+
+    } else if (!$newTweetSlice) {
+      alert('Text field empty');
+    }
+
   });
 
-  function loadTweets() {
-    $.get('/tweets', (serverRouteResponseFnc) => {
-      renderTweets(serverRouteResponseFnc);
-    });
-  }
+  $('.compose-button').click(function () {
+    $('.new-tweet').slideToggle('fast');
+    $('.tweet-field').focus();
+  });
 
   loadTweets();
 });

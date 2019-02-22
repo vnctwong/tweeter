@@ -23,6 +23,7 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   <!-- <script type="text/javascript" src="/scripts/test.js"></script> -->
+
 </head>
 
 <body>
@@ -31,6 +32,8 @@
   <nav id="nav-bar">
     <img class="logo" src="/images/bird.png">
     <span class="header">Tweeter</span>
+    <!--stop this from moving-->
+    <input type="submit" class='compose-button' value='Compose'>
   </nav>
 
   <!-- Page-specific (main) content here -->
@@ -49,24 +52,9 @@
     </section>
 
     <section class='tweet-list'>
-      <article class="tweet-container">
 
-        <header class="tweet-container-header">
-          <img src='http://cdn.shopify.com/s/files/1/0822/1983/articles/bf6353fa41888904d313ace7d34f5682.png?v=1503693228'
-            class='avatar'>
-          <span class="full-name">full name</span>
-          <span class='user-name'>username</span>
-        </header>
+      <!-- new tweet <articles> created here -->
 
-        <div class='tweet-submitted'>
-          old tweet
-        </div>
-
-        <footer class='tweet-container-footer'>
-          <p name="text" class="days-submitted">10 days ago </p>
-        </footer>
-
-      </article>
     </section>
 
   </main>
