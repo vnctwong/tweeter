@@ -1,6 +1,6 @@
 .tweet-container {
   width: 380px;
-  height: 200px;
+  height: 185px;
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 10px 10px 10px 10px;
@@ -37,7 +37,7 @@
   float: left;
 }
 
-.username {
+.user-name {
   float: right;
   padding-right: 1em;
   padding-top: 14px;
@@ -58,4 +58,13 @@
   padding-left: 5px;
   padding-bottom: 5px;
   border-radius: 0px 0px 10px 10px;
+}
+
+.icons {
+  max-height: 15px;
+
+  padding-right: 3px;
+  padding-bottom: 1px;
+  float: right;
+  outline: none;
 }

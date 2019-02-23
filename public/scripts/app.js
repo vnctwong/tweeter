@@ -1,5 +1,7 @@
 $(() => {
 
+  $('.error').hide();
+
   function loadTweets() {
     $.get('/tweets', (serverRouteResponseFnc) => {
       renderTweets(serverRouteResponseFnc);
@@ -21,34 +23,51 @@ $(() => {
     let $tweet = $('<article>').addClass('tweet-container');
 
     //define <h>avatar, fullname, username, tweet-submitted, <f>days-submitted
-    let avatar = data.user.avatars.small;
+
     let fullname = data.user.name;
     let username = data.user.handle;
-    let tweetSubmitted = data.content.text
-    let daysSubmitted = data.created_at
+    let tweetSubmitted = data.content.text;
+    let tweetCreateTime = new Date(data.created_at);
+    let daysSubmitted = tweetCreateTime.toDateString();
 
     //formart article you want to send out
     $('<header>').addClass('tweet-container-header').appendTo($tweet);
     $('<img>', {
       id: 'image',
-      src: avatar,
+      src: data.user.avatars.small,
     }).addClass('avatar').appendTo($tweet.children('header'));
+
     $('<span>').addClass('full-name').text(fullname).appendTo($tweet.children('header'));
     $('<span>').addClass('user-name').text(username).appendTo($tweet.children('header'));
+
     $('<div>').addClass('tweet-submitted').text(tweetSubmitted).appendTo($tweet);
+
     $('<footer>').addClass('tweet-container-footer').appendTo($tweet);
     $('<span>').addClass('days-submitted').text(daysSubmitted).appendTo($tweet.children('footer'));
+    $('<input>', {
+      type: 'image',
+      src: '/images/refresh.png',
+      class: 'icons',
+    }).appendTo($tweet.children('footer'));
+    $('<input>', {
+      type: 'image',
+      src: '/images/heart.png',
+      class: 'icons',
+    }).appendTo($tweet.children('footer'));
+    $('<input>', {
+      type: 'image',
+      src: '/images/flag.png',
+      class: 'icons',
+    }).appendTo($tweet.children('footer'));
+
+
     console.log($tweet);
     return $tweet;
   }
 
-  //location of submit
   $('.new-tweet').on('submit', (event) => {
-    //overides normal route
     event.preventDefault();
-    //define data reload object, serialize?
     const $newTweet = $('.tweet-field').serialize();
-    //on 'success?' ajax reqs data + callback
     const $newTweetSlice = $newTweet.slice(5);
 
     if ($newTweetSlice.length < 140 && $newTweetSlice !== '') {
@@ -64,9 +83,11 @@ $(() => {
 
     } else if ($newTweetSlice.length > 140) {
       $('.error').text('Text length exceeds 140 characters');
+      $('.error').fadeIn(500);
       $('.error').fadeOut(4000);
     } else {
       $('.error').text('Text field empty');
+      $('.error').fadeIn(500);
       $('.error').fadeOut(4000);
     };
 

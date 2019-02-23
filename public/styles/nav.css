@@ -3,6 +3,8 @@
   position: fixed;
   height: 80px;
   width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
   background: #00a087;
   color: #e8fdff;
   z-index: 1030;
@@ -27,11 +29,6 @@
   margin-right: 2em;
   margin-top: 1.5em;
 }
-
-
-
-
-
 
 /*
 display
