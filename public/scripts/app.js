@@ -27,8 +27,9 @@ $(() => {
     let fullname = data.user.name;
     let username = data.user.handle;
     let tweetSubmitted = data.content.text;
-    let tweetCreateTime = new Date(data.created_at);
-    let daysSubmitted = tweetCreateTime.toDateString();
+    let tweetCreateTime = (new Date(data.created_at)).toDateString();
+    let daysOld = Math.round(Math.abs((data.created_at - Date.now()) / (24 * 60 * 60 * 1000)));
+    let daysSubmitted = daysOld > 0 ? `${daysOld} days old` : `Today at ${tweetCreateTime}`;
 
     //formart article you want to send out
     $('<header>').addClass('tweet-container-header').appendTo($tweet);
@@ -70,7 +71,7 @@ $(() => {
     const $newTweet = $('.tweet-field').serialize();
     const $newTweetSlice = $newTweet.slice(5);
 
-    if ($newTweetSlice.length < 140 && $newTweetSlice !== '') {
+    if ($newTweetSlice.length <= 140 && $newTweetSlice !== '') {
       console.log($newTweet);
       $.post('/tweets', $newTweet)
         .then(() => {

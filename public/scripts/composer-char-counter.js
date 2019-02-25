@@ -12,7 +12,9 @@ $(document).ready(function () {
 
     if ($count.text() < 0) {
       $count.css('color', 'red');
-    };
+    } else {
+      $count.css('color', 'black');
+    }
   });
 });
 
