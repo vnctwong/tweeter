@@ -8,6 +8,15 @@ $(() => {
     });
   }
 
+  function clearTweet() {
+    $(".tweet-field").val('');
+  }
+
+  $('.compose-button').click(function () {
+    $('.new-tweet').slideToggle('fast');
+    $('.tweet-field').focus();
+  });
+
   function renderTweets(tweetArray) {
     // loops through tweets
     for (var e = 0; e < tweetArray.length; e++) {
@@ -27,7 +36,7 @@ $(() => {
     let fullname = data.user.name;
     let username = data.user.handle;
     let tweetSubmitted = data.content.text;
-    let tweetCreateTime = (new Date(data.created_at)).toDateString();
+    let tweetCreateTime = (new Date(data.created_at)).toString().slice(16, 33);
     let daysOld = Math.round(Math.abs((data.created_at - Date.now()) / (24 * 60 * 60 * 1000)));
     let daysSubmitted = daysOld > 0 ? `${daysOld} days old` : `Today at ${tweetCreateTime}`;
 
@@ -74,9 +83,9 @@ $(() => {
     if ($newTweetSlice.length <= 140 && $newTweetSlice !== '') {
       console.log($newTweet);
       $.post('/tweets', $newTweet)
-        .then(() => {
+        .then(function () {
           loadTweets();
-
+          clearTweet();
         })
         .fail((err) => {
           console.log(err);
@@ -92,11 +101,6 @@ $(() => {
       $('.error').fadeOut(4000);
     };
 
-  });
-
-  $('.compose-button').click(function () {
-    $('.new-tweet').slideToggle('fast');
-    $('.tweet-field').focus();
   });
 
   loadTweets();
