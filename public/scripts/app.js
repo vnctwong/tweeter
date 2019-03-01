@@ -18,6 +18,7 @@ $(() => {
   });
 
   function renderTweets(tweetArray) {
+    $('.tweet-list').empty
     // loops through tweets
     for (var e = 0; e < tweetArray.length; e++) {
       // calls createTweetElement
@@ -104,4 +105,22 @@ $(() => {
   });
 
   loadTweets();
+
+  if ($('tweet-list').children().length === 0) {
+    const $tempTweet = {
+      user: {
+        name: 'Hello',
+        avatars: {
+          small: 'https://vanillicon.com/371d24858ca58a84f17f9dd707c77fd1_50.png'
+        },
+        created_at: Date.now(),
+        handle: 'world'
+      },
+      content: {
+        text: 'Would you like to compose a tweet?'
+      }
+    }
+
+    renderTweets([$tempTweet]);
+  }
 });
