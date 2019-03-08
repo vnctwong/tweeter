@@ -10,6 +10,7 @@ $(() => {
 
   function clearTweet() {
     $(".tweet-field").val('');
+    $(".counter").text(140);
   }
 
   $('.compose-button').click(function () {
@@ -38,8 +39,9 @@ $(() => {
     let username = data.user.handle;
     let tweetSubmitted = data.content.text;
     let tweetCreateTime = (new Date(data.created_at)).toString().slice(16, 33);
-    let daysOld = Math.round(Math.abs((data.created_at - Date.now()) / (24 * 60 * 60 * 1000)));
-    let daysSubmitted = daysOld > 0 ? `${daysOld} days old` : `Today at ${tweetCreateTime}`;
+    let secondsOld = Math.round(Math.abs((data.created_at - Date.now()) / (1000)));
+    let daysSubmitted = secondsOld > 0 ? `${secondsOld} seconds ago` : `Today at ${tweetCreateTime}`;
+    // make if statements for seconds > 60, minutes > 60, etc
 
     //formart article you want to send out
     $('<header>').addClass('tweet-container-header').appendTo($tweet);
