@@ -19,7 +19,7 @@ $(() => {
   });
 
   function renderTweets(tweetArray) {
-    $('.tweet-list').empty
+    $('.tweet-list').empty()
     // loops through tweets
     for (var e = 0; e < tweetArray.length; e++) {
       // calls createTweetElement
